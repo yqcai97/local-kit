@@ -1,18 +1,20 @@
 # 来源与完整性记录 / Provenance
 
-本仓库是 `dsh-purge` **v1.1.71** 的完整源码快照，来自上游原始 Git 仓库归档，用于个人私库保存与维护。
+本仓库是 `dsh-purge` **v1.1.71** 的完整源码快照，来自上游原始 Git 仓库归档，现作为**公开**的个人维护分支对外提供安装。
 
-## 本私库
+## 本仓库（公开）
 
 | 项目 | 值 |
 | --- | --- |
-| 仓库（私有） | `https://github.com/yqcai97/dsh-purge` |
+| 仓库（**公开**） | `https://github.com/yqcai97/dsh-purge` |
 | 默认分支 | `master` |
-| 快照提交 | `2ea506705c7255d5f403d365af34688d7f29e558` |
-| Tag | `v1.1.71` |
+| 快照提交 | `2ea506705c7255d5f403d365af34688d7f29e558`（原始未改动快照） |
+| 当前 HEAD | `6e17ff0` 起：把 `repository` / `homepage` / `bugs` / `dsh.install.*` 全部重指到本仓 |
+| Tag | `v1.1.71`（原始快照）、`v1.1.71-fork.1`（URL 修正后） |
 | 文件数 | 106（104 个上游源码文件 + `.gitignore` + 本文件） |
+| 匿名可下载 | 已验证：`raw.githubusercontent` 200、`codeload` tarball 200（无需 token） |
 
-安装（本机已登录 `gh`，git 凭证走 `gh auth git-credential`）：
+安装（匿名即可，无需登录 GitHub）：
 
 ```bash
 # 方式一：github 简写
@@ -22,13 +24,13 @@ dsh plugin add github:yqcai97/dsh-purge
 git clone https://github.com/yqcai97/dsh-purge.git
 dsh plugin add ./dsh-purge
 
-# 方式三：私有库 tarball（需带 token）
-curl -L -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/yqcai97/dsh-purge/tarball/v1.1.71 -o dsh-purge-1.1.71.tgz
-dsh plugin add ./dsh-purge-1.1.71.tgz
+# 方式三：tarball 直装
+curl -L https://github.com/yqcai97/dsh-purge/archive/refs/heads/master.tar.gz -o dsh-purge-master.tgz
+dsh plugin add ./dsh-purge-master.tgz
 ```
 
-> 私有库注意：`dsh plugin add` 底层走 pnpm/npm 拉取，未登录环境需设 `GITHUB_TOKEN`（`repo` 权限），否则 404；有 `gh` 登录 + `gh auth setup-git` 的环境可直接 clone/装。
+> URL 修正说明：上游原 `package.json` 里 `dsh.install.tarball/zip/git` 三处都指向已 404 的 `YuJunZhiXue/dsh-purge`，直接改公开库若不动这三行，插件安装器按元数据回源仍会拿到 404。本仓已在 `6e17ff0` 中全部重指到 `yqcai97/dsh-purge`。
+
 
 ## 上游原始信息
 
