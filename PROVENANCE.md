@@ -2,6 +2,34 @@
 
 本仓库是 `dsh-purge` **v1.1.71** 的完整源码快照，来自上游原始 Git 仓库归档，用于个人私库保存与维护。
 
+## 本私库
+
+| 项目 | 值 |
+| --- | --- |
+| 仓库（私有） | `https://github.com/yqcai97/dsh-purge` |
+| 默认分支 | `master` |
+| 快照提交 | `2ea506705c7255d5f403d365af34688d7f29e558` |
+| Tag | `v1.1.71` |
+| 文件数 | 106（104 个上游源码文件 + `.gitignore` + 本文件） |
+
+安装（本机已登录 `gh`，git 凭证走 `gh auth git-credential`）：
+
+```bash
+# 方式一：github 简写
+dsh plugin add github:yqcai97/dsh-purge
+
+# 方式二：clone 后本地装
+git clone https://github.com/yqcai97/dsh-purge.git
+dsh plugin add ./dsh-purge
+
+# 方式三：私有库 tarball（需带 token）
+curl -L -H "Authorization: token $GITHUB_TOKEN" \
+  https://api.github.com/repos/yqcai97/dsh-purge/tarball/v1.1.71 -o dsh-purge-1.1.71.tgz
+dsh plugin add ./dsh-purge-1.1.71.tgz
+```
+
+> 私有库注意：`dsh plugin add` 底层走 pnpm/npm 拉取，未登录环境需设 `GITHUB_TOKEN`（`repo` 权限），否则 404；有 `gh` 登录 + `gh auth setup-git` 的环境可直接 clone/装。
+
 ## 上游原始信息
 
 | 项目 | 值 |
