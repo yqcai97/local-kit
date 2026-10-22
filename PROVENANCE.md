@@ -1,35 +1,39 @@
 # 来源与完整性记录 / Provenance
 
-本仓库是 `dsh-purge` **v1.1.71** 的完整源码快照，来自上游原始 Git 仓库归档，现作为**公开**的个人维护分支对外提供安装。
+本仓库是 `dsh-purge` **v1.1.71** 的完整源码快照，来自上游原始 Git 仓库归档，现作为**私有**的个人维护分支保存（仓库名已改为中性的 `local-kit`，包名/代码保持 `dsh-purge` 原样）。
 
-## 本仓库（公开）
+## 本仓库（私有）
 
 | 项目 | 值 |
 | --- | --- |
-| 仓库（**公开**） | `https://github.com/yqcai97/dsh-purge` |
+| 仓库（**私有**） | `https://github.com/yqcai97/local-kit` |
+| 旧地址 | `https://github.com/yqcai97/dsh-purge` → 已改名，匿名访问一律 404（GitHub 侧保留重定向，但目标私有） |
 | 默认分支 | `master` |
 | 快照提交 | `2ea506705c7255d5f403d365af34688d7f29e558`（原始未改动快照） |
-| 当前 HEAD | `6e17ff0` 起：把 `repository` / `homepage` / `bugs` / `dsh.install.*` 全部重指到本仓 |
-| Tag | `v1.1.71`（原始快照）、`v1.1.71-fork.1`（URL 修正后） |
+| 后续提交 | `57a0f6a` 来源说明；`6e17ff0` 安装源重指；`b583566` 公开期文档；`a9fbf9c` 改名；`c4ad17f` 去 BOM；之后仅文档 |
+| Tag | `v1.1.71`（原始快照）、`v1.1.71-fork.1`、`v1.1.71-fork.2` |
 | 文件数 | 106（104 个上游源码文件 + `.gitignore` + 本文件） |
-| 匿名可下载 | 已验证：`raw.githubusercontent` 200、`codeload` tarball 200（无需 token） |
+| 匿名可访问 | 否：仓库页 / `raw` / `codeload` / `api` 实名探测全部 **404** |
 
-安装（匿名即可，无需登录 GitHub）：
+安装（需本机有 GitHub 凭证）：
 
 ```bash
-# 方式一：github 简写
-dsh plugin add github:yqcai97/dsh-purge
+# 方式一：本机已 gh auth login 且 gh auth setup-git（git 走 gh credential helper）
+dsh plugin add github:yqcai97/local-kit
 
-# 方式二：clone 后本地装
-git clone https://github.com/yqcai97/dsh-purge.git
-dsh plugin add ./dsh-purge
+# 方式二：clone 后本地装（最稳，不依赖安装器如何解析私有库）
+git clone https://github.com/yqcai97/local-kit.git
+dsh plugin add ./local-kit
 
-# 方式三：tarball 直装
-curl -L https://github.com/yqcai97/dsh-purge/archive/refs/heads/master.tar.gz -o dsh-purge-master.tgz
-dsh plugin add ./dsh-purge-master.tgz
+# 方式三：带 token 的 tarball
+curl -L -H "Authorization: token $GITHUB_TOKEN" \
+  https://api.github.com/repos/yqcai97/local-kit/tarball/master -o local-kit.tgz
+dsh plugin add ./local-kit.tgz
 ```
 
-> URL 修正说明：上游原 `package.json` 里 `dsh.install.tarball/zip/git` 三处都指向已 404 的 `YuJunZhiXue/dsh-purge`，直接改公开库若不动这三行，插件安装器按元数据回源仍会拿到 404。本仓已在 `6e17ff0` 中全部重指到 `yqcai97/dsh-purge`。
+> 私有库关键点：`github:owner/repo` 简写最终由 git 向 GitHub 取包，**能不能装取决于本机 git 凭证**。本机已 `gh auth setup-git`（`credential.https://github.com.helper = !gh auth git-credential`），所以匿名 shell 里 `pnpm add github:yqcai97/local-kit` 也能成功——那是凭证在起作用，不是库公开。没凭证的机器一律拿到 404。
+
+> URL 修正说明：上游原 `package.json` 的 `dsh.install.tarball/zip/git` 三处都指向已 404 的 `YuJunZhiXue/dsh-purge`，已全部重指到本仓；`repository` / `homepage` / `bugs` 同步更新。**代码与资源文件一字未改**，仅元数据 URL。
 
 
 ## 上游原始信息
